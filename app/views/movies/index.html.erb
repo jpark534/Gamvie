@@ -1,0 +1,31 @@
+<div style="max-width: 700px; margin: 0 auto; padding: 40px 20px; font-family: sans-serif;">
+
+  <h1 style="font-size: 2rem; margin-bottom: 4px;">🎬 Match-a-Movie</h1>
+  <p style="color: #888; margin-bottom: 32px;">Tell us how you're feeling and we'll find your perfect film.</p>
+
+  <%= form_with url: recommend_path, method: :post, data: { turbo: false } do |f| %>
+    <%= f.text_area :mood_input,
+        placeholder: "e.g. I just got rejected, I'm studying and need background vibes, something like Interstellar but happier...",
+        rows: 3,
+        style: "width: 100%; padding: 12px; font-size: 1rem; border-radius: 8px; border: 1px solid #ccc; resize: none;" %>
+    <br><br>
+    <%= f.submit "Find My Movies →",
+        style: "background: #e50914; color: white; border: none; padding: 12px 24px; font-size: 1rem; border-radius: 8px; cursor: pointer;" %>
+  <% end %>
+
+  <% if @movies.present? %>
+    <div style="margin-top: 40px;">
+      <p style="color: #888;">Detected mood: <strong><%= @detected_moods.join(", ") %></strong></p>
+      <h2 style="margin-bottom: 16px;">We think you'd like...</h2>
+
+      <% @movies.each do |movie| %>
+        <div style="border: 1px solid #eee; border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+          <h3 style="margin: 0 0 4px;"><%= movie.title %></h3>
+          <p style="color: #888; font-size: 0.85rem; margin: 0 0 8px;"><%= movie.genre %> · ⭐ <%= movie.rating %></p>
+          <p style="margin: 0;"><%= movie.description %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+</div>
