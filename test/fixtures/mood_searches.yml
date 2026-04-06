@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  mood_input: MyString
+  detected_moods: MyString
+  movies_matched: 1
+
+two:
+  user: two
+  mood_input: MyString
+  detected_moods: MyString
+  movies_matched: 1
