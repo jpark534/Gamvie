@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  genre: MyString
+  mood_tags: MyString
+  description: MyString
+  poster_url: MyString
+  rating: 1.5
+
+two:
+  title: MyString
+  genre: MyString
+  mood_tags: MyString
+  description: MyString
+  poster_url: MyString
+  rating: 1.5
