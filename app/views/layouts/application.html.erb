@@ -24,6 +24,22 @@
   </head>
 
   <body>
+    <nav style="background: #141414; padding: 14px 32px; display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" style="color: white; text-decoration: none; font-size: 1.2rem; font-weight: bold;">🎬 Match-a-Movie</a>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <% if user_signed_in? %>
+          <span style="color: #aaa; font-size: 0.9rem;">👤 <%= current_user.email %></span>
+          <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete },
+              style: "color: #e50914; text-decoration: none; font-size: 0.9rem;" %>
+        <% else %>
+          <%= link_to "Sign in", new_user_session_path,
+              style: "color: #aaa; text-decoration: none; font-size: 0.9rem;" %>
+          <%= link_to "Sign up", new_user_registration_path,
+              style: "color: white; background: #e50914; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.9rem;" %>
+        <% end %>
+      </div>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
