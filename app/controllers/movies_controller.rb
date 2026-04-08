@@ -3,10 +3,6 @@ class MoviesController < ApplicationController
   end
 
   def recommend
-    if request.get?
-      redirect_to root_path and return
-    end
-
     @input = params[:mood_input]
     @shuffle = params[:shuffle] == "true"
     matcher = MoodMatcher.new(@input)
