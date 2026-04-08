@@ -55,6 +55,22 @@
             </div>
           </div>
         <% end %>
+        <div style="margin-top: 20px; text-align: center;">
+          <%= form_with url: recommend_path, method: :post, data: { turbo: false } do |f| %>
+            <%= f.hidden_field :mood_input, value: @input %>
+            <%= f.hidden_field :shuffle, value: "true" %>
+            <%= f.submit "↻ Not feeling this? Try different picks",
+                  style: "background: rgba(255,255,255,0.04);
+                          color: rgba(255,255,255,0.5);
+                          border: 0.5px solid rgba(255,255,255,0.12);
+                          border-radius: 8px;
+                          padding: 10px 20px;
+                          font-size: 13px;
+                          cursor: none;
+                          transition: all 0.2s ease;
+                          margin-top: 8px;" %>
+          <% end %>
+        </div>
       </div>
     <% end %>
 

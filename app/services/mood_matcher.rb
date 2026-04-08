@@ -38,20 +38,25 @@ class MoodMatcher
     moods.empty? ? ["cozy"] : moods  # default to cozy if nothing detected
   end
 
-  def matching_movies
+  def matching_movies(shuffle: false)
     moods = detected_moods
     all_matches = Movie.all.select do |movie|
       tags = movie.mood_tags.split(",")
       (tags & moods).any?
     end
-
-    # Score each movie by how many moods it matches
+  
     scored = all_matches.map do |movie|
       tags = movie.mood_tags.split(",")
       score = (tags & moods).length
       { movie: movie, score: score }
     end
-
-    scored.sort_by { |m| -m[:score] }.first(5).map { |m| m[:movie] }
+  
+    sorted = scored.sort_by { |m| -m[:score] }
+  
+    if shuffle
+      sorted = sorted.shuffle
+    end
+  
+    sorted.first(5).map { |m| m[:movie] }
   end
 end
