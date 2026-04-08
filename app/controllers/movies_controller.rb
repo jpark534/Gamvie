@@ -22,4 +22,31 @@ class MoviesController < ApplicationController
     session[:shown_movie_ids] = @movies.map(&:id)
     render :index
   end
+  def api_recommendations
+    input = params[:mood]
+  
+    if input.blank?
+      render json: { error: "Please provide a mood parameter e.g. ?mood=happy" }, status: 400
+      return
+    end
+  
+    matcher = MoodMatcher.new(input)
+    detected = matcher.detected_moods
+    movies = matcher.matching_movies
+  
+    render json: {
+      input: input,
+      detected_moods: detected,
+      results: movies.map do |m|
+        {
+          title: m.title,
+          genre: m.genre,
+          rating: m.rating,
+          description: m.description,
+          poster_url: m.poster_url,
+          mood_tags: m.mood_tags.split(",")
+        }
+      end
+    }
+  end
 end
