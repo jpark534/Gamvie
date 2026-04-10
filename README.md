@@ -1,24 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+**Why Gamvie?**
+---
+The name blends 감 (*gam*), the Korean word for "feeling" or "sense," with vie, derived from "movie." It reflects exactly what the app does: *matching films to your emotional state.*
