@@ -1,5 +1,12 @@
 class MoviesController < ApplicationController
   def index
+    if session[:last_results].present?
+      @input = session[:last_results]["input"]
+      @detected_moods = session[:last_results]["detected_moods"]
+      movie_ids = session[:last_results]["movie_ids"]
+      @movies = Movie.where(id: movie_ids).sort_by { |m| movie_ids.index(m.id) }
+      session[:last_results] = nil
+    end
   end
 
   def recommend
@@ -7,7 +14,6 @@ class MoviesController < ApplicationController
     @shuffle = params[:shuffle] == "true"
     matcher = MoodMatcher.new(@input)
     @detected_moods = matcher.detected_moods
-
     all_matches = matcher.matching_movies(shuffle: true)
 
     if @shuffle
@@ -20,33 +26,12 @@ class MoviesController < ApplicationController
     end
 
     session[:shown_movie_ids] = @movies.map(&:id)
-    render :index
-  end
-  def api_recommendations
-    input = params[:mood]
-  
-    if input.blank?
-      render json: { error: "Please provide a mood parameter e.g. ?mood=happy" }, status: 400
-      return
-    end
-  
-    matcher = MoodMatcher.new(input)
-    detected = matcher.detected_moods
-    movies = matcher.matching_movies
-  
-    render json: {
-      input: input,
-      detected_moods: detected,
-      results: movies.map do |m|
-        {
-          title: m.title,
-          genre: m.genre,
-          rating: m.rating,
-          description: m.description,
-          poster_url: m.poster_url,
-          mood_tags: m.mood_tags.split(",")
-        }
-      end
+    session[:last_results] = {
+      "input" => @input,
+      "detected_moods" => @detected_moods,
+      "movie_ids" => @movies.map(&:id)
     }
+
+    redirect_to root_path
   end
 end
