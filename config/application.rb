@@ -10,6 +10,8 @@ module MatchAMovie
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
+    config.active_job.queue_adapter = :async
+    config.cache_store = :memory_store
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
