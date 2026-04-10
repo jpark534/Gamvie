@@ -17,7 +17,7 @@
     <p style="font-size: 16px; color: rgba(255,255,255,0.35); margin-bottom: 6px;">Tell us how you're feeling and we'll find your perfect film.</p>
     <p style="font-size: 12px; color: rgba(255,255,255,0.18); letter-spacing: 0.05em; margin-bottom: 36px;">감 (gam) — feeling · vie — movie</p>
 
-    <%= form_with url: recommend_path, method: :post, data: { turbo: false } do |f| %>
+    <%= form_with url: recommend_path, method: :post, local: true, data: { turbo: false } do |f| %>
       <div class="mood-input-box">
         <%= f.text_area :mood_input,
             placeholder: "e.g. I just got rejected, need background vibes, just bored...",
