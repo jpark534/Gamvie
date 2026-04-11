@@ -1,12 +1,5 @@
 class MoviesController < ApplicationController
   def index
-    if session[:last_results].present?
-      @input = session[:last_results]["input"]
-      @detected_moods = session[:last_results]["detected_moods"]
-      movie_ids = session[:last_results]["movie_ids"]
-      @movies = Movie.where(id: movie_ids).sort_by { |m| movie_ids.index(m.id) }
-      session[:last_results] = nil
-    end
   end
 
   def recommend
@@ -26,12 +19,6 @@ class MoviesController < ApplicationController
     end
 
     session[:shown_movie_ids] = @movies.map(&:id)
-    session[:last_results] = {
-      "input" => @input,
-      "detected_moods" => @detected_moods,
-      "movie_ids" => @movies.map(&:id)
-    }
-
-    redirect_to root_path
+    render :index, status: :unprocessable_entity
   end
 end

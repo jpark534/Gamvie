@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module MatchAMovie
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.session_store :cookie_store, key: '_gamvie_session'
     config.load_defaults 8.1
     config.active_job.queue_adapter = :async
     config.cache_store = :memory_store
