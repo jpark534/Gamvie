@@ -19,6 +19,6 @@ class MoviesController < ApplicationController
     end
 
     session[:shown_movie_ids] = @movies.map(&:id)
-    render :index, status: :unprocessable_entity
+    render :index
   end
 end
