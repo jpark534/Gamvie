@@ -184,9 +184,9 @@
     <%= yield %>
 
     <script>
-      const cursor = document.getElementById('cursor');
-      const emojis = ['🎬', '🎞️', '🎥', '📽️'];
-      let emojiIndex = 0;
+      var cursor = document.getElementById('cursor');
+      var emojis = ['🎬', '🎞️', '🎥', '📽️'];
+      var emojiIndex = 0;
 
       document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX + 'px';
