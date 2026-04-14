@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
     matcher = MoodMatcher.new(@input)
     @detected_moods = matcher.detected_moods
     all_matches = matcher.matching_movies(shuffle: true)
-
+  
     if @shuffle
       previously_shown = session[:shown_movie_ids] || []
       remaining = all_matches.reject { |m| previously_shown.include?(m.id) }
@@ -17,8 +17,8 @@ class MoviesController < ApplicationController
     else
       @movies = all_matches.first(5)
     end
-
+  
     session[:shown_movie_ids] = @movies.map(&:id)
-    render :index
+    render :index, status: :unprocessable_entity
   end
 end
