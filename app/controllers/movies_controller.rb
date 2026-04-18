@@ -19,6 +19,10 @@ class MoviesController < ApplicationController
     end
   
     session[:shown_movie_ids] = @movies.map(&:id)
-    render :index, status: :unprocessable_entity
+  
+    respond_to do |format|
+      format.turbo_stream { render :index, status: :unprocessable_entity }
+      format.html { render :index, status: :unprocessable_entity }
+    end
   end
 end
